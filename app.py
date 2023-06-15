@@ -10,7 +10,7 @@ from sklearn.metrics import mean_absolute_percentage_error
 import pickle5 as pickle 
 
 st.set_page_config(
-    page_title="Crued Oil Prediction",
+    page_title="Prediksi Saham PT.Indosat Ooredoo Hutchison Tbk",
     page_icon='https://icon-library.com/images/data-science-icon/data-science-icon-25.jpg',
     layout='centered',
     initial_sidebar_state="expanded",
@@ -20,7 +20,7 @@ st.set_page_config(
         'About': "# This is a header. This is an *extremely* cool app!"
     }
 )
-st.write("""<h1>Aplikasi Prediksi data Time Series pada Dataset Import Crude Oil To US</h1>""",unsafe_allow_html=True)
+st.write("""<h1>Aplikasi Prediksi Saham PT.Indosat Ooredoo Hutchison Tbk</h1>""",unsafe_allow_html=True)
 
 with st.container():
     with st.sidebar:
@@ -38,43 +38,32 @@ with st.container():
 
     if selected == "Home":
         st.write("""<h3 style = "text-align: center;">
-        <img src="https://imgsrv2.voi.id/0GXpHiKI-CGE-Due4Lf-FneHR564kSBNlKNPpssXH7w/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy8xODYxMzIvMjAyMjA3MDQxMzI2LW1vYmlsZS5qcGc.jpg" width="500" height="300">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Indosat_Ooredoo.svg/1280px-Indosat_Ooredoo.svg.png" width="500" height="300">
         </h3>""",unsafe_allow_html=True)
 
     elif selected == "Description":
-        st.subheader("""Pengertian""")
+        st.subheader("""Deskripsi Aplikasi""")
         st.write("""
-        Dataset ini merupakan data jumlah barel minyak mentah yang telah di import dari seluruh dunia ke negara Amerika Serikat dalam hitungan perbulan data ini diambil dari bulan januari 2009 hingga januari 2021.
+         Aplikasi Indosat Prediction merupakan aplikasi yang digunakan untuk memprediksi saham dari PT.Indosat Ooredoo pada hari berikutnya. 
         """)
 
-        st.subheader("""Kegunaan Dataset""")
+        st.subheader("""Deskripsi Data""")
         st.write("""
-        Dataset ini digunakan untuk melakukan prediksi perkiraan jumlah barel minyak yang akan di import dari seluruh dunia ke negara Amerika Serikat pada periode berikutnya.
+        Data yang digunakan dalam aplikasi ini yaitu data saham PT.Indosat Ooredoo Hutchison Tbk periode 15 Juni 2022 sampai 15 Juni 2023. Data yang ditampilkan adalah data saham yang diperoleh per harinya. 
         """)
-
-        st.subheader("""Fitur""")
-        st.markdown(
-            """
-            Fitur-fitur yang terdapat pada dataset:
-            - Period: 
-                - Fitur ini merupakan fitur yang perlihatkan periode dari data time series tersebut. Pada fitur ini data tercatat setiap bulannya mulai dari Januari 2009 - Januari 2021
-            - Imports Crude Oil Monthly (thousand barrels).
-                - Fitur berikut ini merupakan data jumlah barel minyak mentah yang telah di terima oleh Amerika Serikat hasil dari Import seluruh dunia.
-            """
-        )
 
         st.subheader("""Sumber Dataset""")
         st.write("""
-        Sumber data di dapatkan melalui website Github.com, Berikut merupakan link untuk mengakses sumber dataset.
-        <a href="https://github.com/rishabh89007/Time_Series_Datasets/blob/main/Imports%20Crude%20Oil.csv">Klik disini</a>""", unsafe_allow_html=True)
+        Sumber data didapatkan dari Yahoo Finance. Berikut merupakan link untuk mengakses sumber dataset.
+        <a href="https://finance.yahoo.com/quote/ISAT.JK/history?p=ISAT.JK">Klik disini</a>""", unsafe_allow_html=True)
         
         st.subheader("""Tipe Data""")
         st.write("""
-        Tipe data yang di gunakan pada dataset Import Crude Oil ini adalah NUMERICAL.
+        Tipe data yang di gunakan pada dataset saham PT.Indosat Ooredoo Hutchison Tbk ini adalah NUMERICAL.
         """)
 
     elif selected == "Dataset":
-        st.subheader("""Dataset Import Crude Oil""")
+        st.subheader("""Dataset Saham PT.Indosat Ooredoo Hutchison Tbk""")
         df = pd.read_csv('https://raw.githubusercontent.com/HanifSantoso05/dataset_matkul/main/Imports%20Crude%20Oil.csv')
         st.dataframe(df, width=600)
 
