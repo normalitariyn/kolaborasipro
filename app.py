@@ -120,7 +120,7 @@ with st.container():
 
     elif selected == "Implementation":
         with st.form("Implementation"):
-            uni = pd.read_csv('dfvolume_unvariate_6fitur.csv')
+            uni = pd.read_csv('dfclose_unvariate_6fitur.csv')
             uni = uni.iloc[:, 1:8]
 
             scaler = MinMaxScaler()
