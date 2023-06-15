@@ -41,7 +41,7 @@ with st.container():
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Indosat_Ooredoo.svg/1280px-Indosat_Ooredoo.svg.png" width="500" height="300">
         </h3>""",unsafe_allow_html=True)
 
-    elif selected == "Description":
+    elif selected == "Data":
         st.subheader("""Deskripsi Aplikasi""")
         st.write("""
          Aplikasi Indosat Prediction merupakan aplikasi yang digunakan untuk memprediksi saham dari PT.Indosat Ooredoo pada hari berikutnya. 
@@ -62,7 +62,6 @@ with st.container():
         Tipe data yang di gunakan pada dataset saham PT.Indosat Ooredoo Hutchison Tbk ini adalah NUMERICAL.
         """)
 
-    elif selected == "Dataset":
         st.subheader("""Dataset Saham PT.Indosat Ooredoo Hutchison Tbk""")
         df = pd.read_csv('https://raw.githubusercontent.com/HanifSantoso05/dataset_matkul/main/ISAT.JK.csv')
         st.dataframe(df, width=600)
