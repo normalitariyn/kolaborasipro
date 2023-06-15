@@ -26,8 +26,8 @@ with st.container():
     with st.sidebar:
         selected = option_menu(
         st.write("""<h2 style = "text-align: center;"><img src="https://icon-library.com/images/data-science-icon/data-science-icon-25.jpg" width="130" height="130"><br></h2>""",unsafe_allow_html=True), 
-        ["Home", "Data", "Prepocessing", "Modeling", "Implementation"], 
-            icons=['house', 'file-earmark-font', 'bar-chart', 'gear', 'arrow-down-square', 'check2-square'], menu_icon="cast", default_index=0,
+        ["Home", "Data", "Prepocessing", "Modeling", "Implementation","Tentang Kami"], 
+            icons=['house', 'file-earmark-font', 'bar-chart', 'gear', 'arrow-down-square', 'person'], menu_icon="cast", default_index=0,
             styles={
                 "container": {"padding": "0!important", "background-color": "#005980"},
                 "icon": {"color": "white", "font-size": "18px"}, 
@@ -68,12 +68,14 @@ with st.container():
 
     elif selected == "Prepocessing":
         st.subheader("""Univariate Transform""")
-        uni = pd.read_csv('dfvolume_unvariate.csv')
+        uni = pd.read_csv('dfclose_unvariate_6fitur.csv')
         uni = uni.iloc[:, 1:9]
         st.dataframe(uni)
         st.subheader("""Normalisasi Data""")
         st.write("""Rumus Normalisasi Data :""")
-        st.image('https://i.stack.imgur.com/EuitP.png', use_column_width=False, width=250)
+        st.write("""<h3 style = "text-align: justify;">
+        <img src="https://androidkt.com/wp-content/uploads/2023/05/Selection_060.png" width="400" height="150">
+        </h3>""",unsafe_allow_html=True)
         st.markdown("""
         Dimana :
         - X = data yang akan dinormalisasi atau data asli
@@ -92,53 +94,34 @@ with st.container():
         st.subheader('Hasil Normalisasi Data')
         st.dataframe(scaled_featuresX.iloc[:,0:7], width=600)
 
-    elif selected == "Modelling":
-
-        uni = pd.read_csv('dfvolume_unvariate.csv')
-        uni = uni.iloc[:, 1:9]
-
-        scaler = MinMaxScaler()
-        #scaler.fit(features)
-        #scaler.transform(features)
-        scaledX = scaler.fit_transform(uni)
-        features_namesX = uni.columns.copy()
-        #features_names.remove('label')
-        scaled_featuresX = pd.DataFrame(scaledX, columns=features_namesX)
-
-        #Split Data 
-        training, test = train_test_split(scaled_featuresX.iloc[:,0:7],test_size=0.1, random_state=0,shuffle=False)#Nilai X training dan Nilai X testing
-        training_label, test_label = train_test_split(scaled_featuresX.iloc[:,-1], test_size=0.1, random_state=0,shuffle=False)#Nilai Y training dan Nilai Y testing
-
-
+    elif selected == "Modeling":
         st.write("#### Percobaan Model")
         st.markdown("""
         Dimana :
-        - Jumlah Fitur Transform Univariet = [1,2,3,4,5] 
-        - K = [3,5,7,9,11]
+        - Jumlah Fitur Transform Univariet = [1,2,3,4,5,6,7,8,9] 
         - Test Size = [0.2,0.3,0.4]
         """)
-        df_percobaan = pd.read_csv('hasil_percobaan1.csv')
+        df_percobaan = pd.read_csv('percobaan2.csv')
         st.write('##### Hasil :')
         data = pd.DataFrame(df_percobaan.iloc[:,1:6])
         st.write(data)
         st.write('##### Grafik Pencarian Nilai Error Terkecil :')
-        st.line_chart(data=data[['Nilai Error MSE','Nilai Error MAPE']], width=0, height=0, use_container_width=True)
+        st.line_chart(data=data[['MAPE_MLP','MAPE_Decision','MAPE_Bayes']], width=0, height=0, use_container_width=True)
         st.write('##### Best Model :')
-        st.info("Jumlah Fitur = 7, K = 3, Test_Size = 0.1, Nilai Erorr MSE= 0.0133, Nilai Error MAPE = 0,085")
-        st.write('##### Model KNN :')
+        st.info("Jumlah Fitur = 6, Test_Size = 0.1, Model = Decision Tree, Nilai Erorr Mape = 1.3961158")
 
-        # load saved model
-        with open('model_knn_pkl' , 'rb') as f:
-            model = pickle.load(f)
-        regresor = model.fit(training, training_label)
-        st.info(regresor)
+        # # load saved model
+        # with open('model_knn_pkl' , 'rb') as f:
+        #     model = pickle.load(f)
+        # regresor = model.fit(training, training_label)
+        # st.info(regresor)
 
             
 
     elif selected == "Implementation":
         with st.form("Implementation"):
-            uni = pd.read_csv('dfvolume_unvariate.csv')
-            uni = uni.iloc[:, 1:9]
+            uni = pd.read_csv('dfvolume_unvariate_6fitur.csv')
+            uni = uni.iloc[:, 1:8]
 
             scaler = MinMaxScaler()
             #scaler.fit(features)
@@ -149,46 +132,49 @@ with st.container():
             scaled_featuresX = pd.DataFrame(scaledX, columns=features_namesX)
 
             #Split Data 
-            training, test = train_test_split(scaled_featuresX.iloc[:,0:7],test_size=0.1, random_state=0,shuffle=False)#Nilai X training dan Nilai X testing
+            training, test = train_test_split(scaled_featuresX.iloc[:,0:6],test_size=0.1, random_state=0,shuffle=False)#Nilai X training dan Nilai X testing
             training_label, test_label = train_test_split(scaled_featuresX.iloc[:,-1], test_size=0.1, random_state=0,shuffle=False)#Nilai Y training dan Nilai Y testing
 
             #Modeling
             # load saved model
-            with open('model_knn_pkl' , 'rb') as f:
-                model = pickle.load(f)
-            regresor = model.fit(training, training_label)
-            pred_test = regresor.predict(test)
-            
+            # import the regressor
+            from sklearn.tree import DecisionTreeRegressor
+
+            # create a regressor object
+            regressor_DT = DecisionTreeRegressor(random_state = 0)
+
+            # fit the regressor with X and Y data
+            regressor_DT.fit(training,training_label)
+            pred_test_DT = regressor_DT.predict(test)
+
             #denomalize data test dan predict
             hasil_denormalized_test = []
             for i in range(len(test)):
-                df_min = uni.iloc[:,0:7].min()
-                df_max = uni.iloc[:,0:7].max()
+                df_min = uni.iloc[:,0:6].min()
+                df_max = uni.iloc[:,0:6].max()
                 denormalized_data_test_list = (test.iloc[i]*(df_max - df_min) + df_min).map('{:.1f}'.format)[0]
                 hasil_denormalized_test.append(denormalized_data_test_list)
 
             hasil_denormalized_predict = []
-            for y in range(len(pred_test)):
-                df_min = uni.iloc[:,0:7].min()
-                df_max = uni.iloc[:,0:7].max()
-                denormalized_data_predict_list = (pred_test[y]*(df_max - df_min) + df_min).map('{:.1f}'.format)[0]
+            for y in range(len(pred_test_DT)):
+                df_min = uni.iloc[:,0:6].min()
+                df_max = uni.iloc[:,0:6].max()
+                denormalized_data_predict_list = (pred_test_DT[y]*(df_max - df_min) + df_min).map('{:.1f}'.format)[0]
                 hasil_denormalized_predict.append(denormalized_data_predict_list)
 
             denormalized_data_test = pd.DataFrame(hasil_denormalized_test,columns=["Testing Data"])
             denormalized_data_preds = pd.DataFrame(hasil_denormalized_predict,columns=["Predict Data"])
 
             #Perhitungan nilai error
-            MSE = mean_squared_error(test_label,pred_test)
             MAPE = mean_absolute_percentage_error(denormalized_data_test,denormalized_data_preds)
 
             # st.subheader("Implementasi Prediksi ")
-            v1 = st.number_input('Masukkan Jumlah volume saham pada 7 hari sebelum periode yang akan di prediksi')
-            v2 = st.number_input('Masukkan Jumlah volume saham pada 6 hari sebelum periode yang akan di prediksi')
-            v3 = st.number_input('Masukkan Jumlah volume saham pada 5 hari sebelum periode yang akan di prediksi')
-            v4 = st.number_input('Masukkan Jumlah volume saham pada 4 hari sebelum periode yang akan di prediksi')
-            v5 = st.number_input('Masukkan Jumlah volume saham pada 3 hari sebelum periode yang akan di prediksi')
-            v6 = st.number_input('Masukkan Jumlah volume saham pada 2 hari sebelum periode yang akan di prediksi')
-            v7 = st.number_input('Masukkan Jumlah volume saham pada 1 hari sebelum periode yang akan di prediksi')
+            v1 = st.number_input('Masukkan Jumlah volume saham pada 6 hari sebelum periode yang akan di prediksi')
+            v2 = st.number_input('Masukkan Jumlah volume saham pada 5 hari sebelum periode yang akan di prediksi')
+            v3 = st.number_input('Masukkan Jumlah volume saham pada 4 hari sebelum periode yang akan di prediksi')
+            v4 = st.number_input('Masukkan Jumlah volume saham pada 3 hari sebelum periode yang akan di prediksi')
+            v5 = st.number_input('Masukkan Jumlah volume saham pada 2 hari sebelum periode yang akan di prediksi')
+            v6 = st.number_input('Masukkan Jumlah volume saham pada 1 hari sebelum periode yang akan di prediksi')
 
             prediksi = st.form_submit_button("Submit")
             if prediksi:
@@ -198,22 +184,26 @@ with st.container():
                     v3,
                     v4,
                     v5,
-                    v6,
-                    v7
+                    v6
                 ])
                 
-                df_min = uni.iloc[:,0:7].min()
-                df_max = uni.iloc[:,0:7].max()
+                df_min = uni.iloc[:,0:6].min()
+                df_max = uni.iloc[:,0:6].max()
                 input_norm = ((inputs - df_min) / (df_max - df_min))
                 input_norm = np.array(input_norm).reshape(1, -1)
 
                 st.write("#### Normalisasi data Input")
                 st.write(input_norm)
 
-                input_pred = regresor.predict(input_norm)
+                input_pred = regressor_DT.predict(input_norm)
 
                 st.write('#### Hasil Prediksi')
                 st.info((input_pred*(df_max - df_min) + df_min).map('{:.1f}'.format)[0])
                 st.write('#### Nilai Error')
-                st.write("###### MSE :",MSE)
                 st.write("###### MAPE :",MAPE)
+
+    elif selected == "Tentang Kami":
+        st.write("##### Mata Kuliah = Prosaindata - C") 
+        st.write("1. Muhammad Hanif Santoso (200411100078)")
+        st.write("2. Normalita Eka Ariyanti (200411100084)")
+        
