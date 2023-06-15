@@ -183,13 +183,13 @@ with st.container():
             MAPE = mean_absolute_percentage_error(denormalized_data_test,denormalized_data_preds)
 
             # st.subheader("Implementasi Prediksi ")
-            v1 = st.number_input('Masukkan Jumlah barrel yang telah di import pada 7 bulan sebelum periode yang akan di prediksi')
-            v2 = st.number_input('Masukkan Jumlah barrel yang telah di import pada 6 bulan sebelum periode yang akan di prediksi')
-            v3 = st.number_input('Masukkan Jumlah barrel yang telah di import pada 5 bulan sebelum periode yang akan di prediksi')
-            v4 = st.number_input('Masukkan Jumlah barrel yang telah di import pada 4 bulan sebelum periode yang akan di prediksi')
-            v5 = st.number_input('Masukkan Jumlah barrel yang telah di import pada 3 bulan sebelum periode yang akan di prediksi')
-            v6 = st.number_input('Masukkan Jumlah barrel yang telah di import pada 2 bulan sebelum periode yang akan di prediksi')
-            v7 = st.number_input('Masukkan Jumlah barrel yang telah di import pada 1 bulan sebelum periode yang akan di prediksi')
+            v1 = st.number_input('Masukkan Jumlah volume saham pada 7 hari sebelum periode yang akan di prediksi')
+            v2 = st.number_input('Masukkan Jumlah volume saham pada 6 hari sebelum periode yang akan di prediksi')
+            v3 = st.number_input('Masukkan Jumlah volume saham pada 5 hari sebelum periode yang akan di prediksi')
+            v4 = st.number_input('Masukkan Jumlah volume saham pada 4 hari sebelum periode yang akan di prediksi')
+            v5 = st.number_input('Masukkan Jumlah volume saham pada 3 hari sebelum periode yang akan di prediksi')
+            v6 = st.number_input('Masukkan Jumlah volume saham pada 2 hari sebelum periode yang akan di prediksi')
+            v7 = st.number_input('Masukkan Jumlah volume saham pada 1 hari sebelum periode yang akan di prediksi')
 
             prediksi = st.form_submit_button("Submit")
             if prediksi:
