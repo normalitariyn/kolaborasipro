@@ -68,7 +68,7 @@ with st.container():
 
     elif selected == "Prepocessing":
         st.subheader("""Univariate Transform""")
-        uni = pd.read_csv('univaried_trans_7f.csv')
+        uni = pd.read_csv('dfvolume_unvariate.csv')
         uni = uni.iloc[:, 1:9]
         st.dataframe(uni)
         st.subheader("""Normalisasi Data""")
@@ -95,7 +95,7 @@ with st.container():
 
     elif selected == "Modeling":
 
-        uni = pd.read_csv('univaried_trans_7fitur.csv')
+        uni = pd.read_csv('dfvolume_unvariate.csv')
         uni = uni.iloc[:, 1:9]
 
         scaler = MinMaxScaler()
@@ -138,7 +138,7 @@ with st.container():
 
     elif selected == "Implementation":
         with st.form("Implementation"):
-            uni = pd.read_csv('univaried_trans_7fitur.csv')
+            uni = pd.read_csv('dfvolume_unvariate.csv')
             uni = uni.iloc[:, 1:9]
 
             scaler = MinMaxScaler()
