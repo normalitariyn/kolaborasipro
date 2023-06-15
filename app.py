@@ -26,7 +26,7 @@ with st.container():
     with st.sidebar:
         selected = option_menu(
         st.write("""<h2 style = "text-align: center;"><img src="https://icon-library.com/images/data-science-icon/data-science-icon-25.jpg" width="130" height="130"><br></h2>""",unsafe_allow_html=True), 
-        ["Home", "Description", "Dataset", "Prepocessing", "Modeling", "Implementation"], 
+        ["Home", "Data", "Prepocessing", "Modeling", "Implementation"], 
             icons=['house', 'file-earmark-font', 'bar-chart', 'gear', 'arrow-down-square', 'check2-square'], menu_icon="cast", default_index=0,
             styles={
                 "container": {"padding": "0!important", "background-color": "#005980"},
