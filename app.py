@@ -93,7 +93,7 @@ with st.container():
         st.subheader('Hasil Normalisasi Data')
         st.dataframe(scaled_featuresX.iloc[:,0:7], width=600)
 
-    elif selected == "Modeling":
+    elif selected == "Modelling":
 
         uni = pd.read_csv('dfvolume_unvariate.csv')
         uni = uni.iloc[:, 1:9]
