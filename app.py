@@ -64,12 +64,12 @@ with st.container():
 
     elif selected == "Dataset":
         st.subheader("""Dataset Saham PT.Indosat Ooredoo Hutchison Tbk""")
-        df = pd.read_csv('https://raw.githubusercontent.com/HanifSantoso05/dataset_matkul/main/Imports%20Crude%20Oil.csv')
+        df = pd.read_csv('https://raw.githubusercontent.com/HanifSantoso05/dataset_matkul/main/ISAT.JK.csv')
         st.dataframe(df, width=600)
 
     elif selected == "Prepocessing":
         st.subheader("""Univariate Transform""")
-        uni = pd.read_csv('univaried_trans_7fitur.csv')
+        uni = pd.read_csv('univaried_trans_7f.csv')
         uni = uni.iloc[:, 1:9]
         st.dataframe(uni)
         st.subheader("""Normalisasi Data""")
